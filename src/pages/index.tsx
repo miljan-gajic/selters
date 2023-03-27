@@ -7,7 +7,7 @@ import Header from "@/components/Header/Header";
 import { api } from "@/utils/api";
 
 import { env } from "@/env.mjs";
-import { useGetAllImages } from "@/features/imageHandling/hooks/imageHooks";
+import UploadAndDisplayImage from "@/features/imageHandling/components/ImageUploader/ImageUploader";
 import {
   listOfFiles,
   ListOfFilesResponse,
@@ -20,9 +20,9 @@ interface Props {
 
 const Home = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
-  const { images } = useGetAllImages();
+  // const { images } = useGetAllImages();
 
-  console.log("IMAGES FROM tRPC and custom HOOK", images);
+  // console.log("IMAGES FROM tRPC and custom HOOK", images);
 
   return (
     <>
@@ -66,6 +66,7 @@ const Home = () => {
               {hello.data ? hello.data.greeting : "Loading tRPC query..."}
             </p>
             <AuthShowcase />
+            <UploadAndDisplayImage />
           </div>
         </div>
       </main>

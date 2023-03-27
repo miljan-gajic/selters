@@ -1,4 +1,6 @@
 import { api } from "@/utils/api";
+import { useCallback } from "react";
+import { Image } from "../components/ImageUploader/ImageUploader";
 import { allImagesDTO } from "../utils/utils";
 
 export interface GetAllImages {
@@ -19,4 +21,18 @@ export const useGetAllImages = (): GetAllImages => {
     isLoading,
     images: images || [],
   };
+};
+
+export const useUploadImage = () => {
+  const mutation = api.images.uploadAnImage.useMutation();
+
+  return useCallback(
+    (image: Image) => {
+      if (!image) {
+        throw new Error("The Image is missing, please provide a valid Image");
+      }
+      mutation.mutate({ profileImage: image });
+    },
+    [mutation]
+  );
 };

@@ -5,6 +5,8 @@ import {
   listOfFiles,
   UploadcareSimpleAuthSchema,
 } from "@uploadcare/rest-client";
+import { uploadFile } from "@uploadcare/upload-client";
+import { z } from "zod";
 
 const uploadcareSimpleAuthSchema = new UploadcareSimpleAuthSchema({
   publicKey: env.UPLOAD_CARE_PUBLIC_KEY,
@@ -19,4 +21,18 @@ export const imageRouter = createTRPCRouter({
     );
     return allImagesDTO(allImages);
   }),
+  uploadAnImage: protectedProcedure
+    .input(
+      z.object({
+        profileImage: z.any(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      console.log("FROM BE", input);
+      const result = await uploadFile(input.profileImage, {
+        publicKey: env.UPLOAD_CARE_PUBLIC_KEY,
+        store: "auto",
+      });
+      return result;
+    }),
 });
