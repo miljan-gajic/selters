@@ -28,7 +28,6 @@ export const imageRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input }) => {
-      console.log("FROM BE", input);
       const result = await uploadFile(input.profileImage, {
         publicKey: env.UPLOAD_CARE_PUBLIC_KEY,
         store: "auto",
