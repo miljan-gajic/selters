@@ -1,23 +1,22 @@
 <script lang="ts">
-	import { AppBar, AppShell } from '@skeletonlabs/skeleton';
+	import { AppBar, AppShell, Avatar, LightSwitch } from '@skeletonlabs/skeleton';
 	import '../app.postcss';
 	// Floating UI for Popups
 	import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
+	import NavItems from '$lib/components/NavItems.svelte';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
-<!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="header">
-		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">Skeleton</strong>
+				<Avatar src="https://i.pravatar.cc/" fontSize={12} />
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<a class="btn btn-sm variant-ghost-surface" href="/"> Home </a>
-				<a class="btn btn-sm variant-ghost-surface" href="/about"> About </a>
+				<NavItems />
+				<LightSwitch />
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
